@@ -10,7 +10,7 @@ resource "aws_security_group" "ssh_access" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"]  # ⚠️ Consider locking down in production
   }
 
   egress {
@@ -30,4 +30,9 @@ resource "aws_instance" "ec2" {
   tags = {
     Name = "Terraform-EC2"
   }
+}
+
+output "ec2_public_ip" {
+  description = "Public IP of the EC2 instance"
+  value       = aws_instance.ec2.public_ip
 }
