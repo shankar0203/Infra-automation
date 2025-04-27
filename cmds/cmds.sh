@@ -16,12 +16,14 @@ echo "Public IP of created EC2: $PUBLIC_IP"
 HOST_FILE="/etc/ansible/hosts"
 GROUP_NAME="webservers"
 ANSIBLE_USER="ubuntu"
-aws s3 cp s3://ml-test-env/Jenkins-key.pem /home/ubuntu
 KEY_PATH="/home/ubuntu/Jenkins-key.pem"
 HOST_ENTRY="$PUBLIC_IP ansible_user=$ANSIBLE_USER ansible_ssh_private_key_file=$KEY_PATH"
 
 # Backup before edit
 cp $HOST_FILE ${HOST_FILE}.bak
+sudo chmod o+w /etc/ansible/hosts
+sudo chmod o+w /etc/ansible/
+
 
 # Check if group exists, if not, add it
 if ! grep -q "^\[$GROUP_NAME\]" "$HOST_FILE"; then
