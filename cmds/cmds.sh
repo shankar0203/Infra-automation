@@ -17,7 +17,7 @@ HOST_FILE="/etc/ansible/hosts"
 GROUP_NAME="webservers"
 ANSIBLE_USER="ubuntu"
 KEY_PATH="/home/ubuntu/Jenkins-key.pem"
-HOST_ENTRY="$PUBLIC_IP ansible_user=$ANSIBLE_USER ansible_ssh_private_key_file=$KEY_PATH"
+ansible_host="$PUBLIC_IP ansible_user=$ANSIBLE_USER ansible_ssh_private_key_file=$KEY_PATH"
 
 # Backup before edit
 cp $HOST_FILE ${HOST_FILE}.bak
@@ -32,8 +32,8 @@ fi
 
 # Add full host entry under the group if not already present
 if ! awk "/^\[$GROUP_NAME\]/ {found=1} /^\[/ {found=0} found && /$PUBLIC_IP/ {exit 1} END {if (found) exit 0; else exit 1}" "$HOST_FILE"; then
-  sed -i "/^\[$GROUP_NAME\]/a $HOST_ENTRY" "$HOST_FILE"
-  echo "✅ Host entry added: $HOST_ENTRY"
+  sed -i "/^\[$GROUP_NAME\]/a $ansible_host" "$HOST_FILE"
+  echo "✅ Host entry added: $ansible_host"
 else
   echo "ℹ️ Host entry for $PUBLIC_IP already exists under group [$GROUP_NAME]"
 fi
