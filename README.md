@@ -86,11 +86,10 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 ```bash
 # Navigate to the directory where cmds.sh exists
-cd Infra-automation/Infra-automation/cmds
+copy the cmds from Infra-automation/Infra-automation/cmds
 
-# Execute the script
-./cmds.sh
-```
+# paste the script/Cmds
+Paste the copied cmds to post build option as shell cmds
 
 ---
 
@@ -121,17 +120,6 @@ http://<New-EC2-Public-IP>
 - This setup is for **testing and learning purposes**.
 - Always follow best practices for IAM roles and security in production environments.
 - Clean up unused EC2 instances and resources to avoid unnecessary AWS billing.
-
----
-
-# 📄 Folder Structure Overview
-```plaintext
-Installation_Scripts/
-    Installation_Scripts.sh    # Script to install required tools
-Infra-automation/
-    cmds/
-        cmds.sh                # Script containing Jenkins build commands
-```
 
 ---
 
